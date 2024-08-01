@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 // Material UI
 import { CssBaseline } from "@mui/material";
+import { Box } from "@mui/material";
 //components
 import {
   Actors,
@@ -17,16 +18,22 @@ import {
   Profile,
   mainRoutes,
 } from "./";
+// custom styles
+import { customStyles } from "./styles.js";
 
 const App = () => {
+  const classes = customStyles();
+
   return (
-    <div>
+    <Box sx={classes.root}>
       <CssBaseline />
       <Navbar />
-      <main>
+
+      <Box component="main" sx={classes.content}>
+        <Box sx={classes.toolbar} />
         <RouterProvider router={mainRoutes} />
-      </main>
-    </div>
+      </Box>
+    </Box>
   );
 };
 
