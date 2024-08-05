@@ -5,10 +5,13 @@ import {
   Route,
   createBrowserRouter,
   RouterProvider,
+  Link,
+  Router,
 } from "react-router-dom";
 // Material UI
 import { CssBaseline } from "@mui/material";
 import { Box } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
 //components
 import {
   Actors,
@@ -27,11 +30,11 @@ const App = () => {
   return (
     <Box sx={classes.root}>
       <CssBaseline />
-      <Navbar />
-
+      <ThemeProvider theme={customStyles}>
+        <Navbar />
+      </ThemeProvider>
       <Box component="main" sx={classes.content}>
         <Box sx={classes.toolbar} />
-        <RouterProvider router={mainRoutes} />
       </Box>
     </Box>
   );
