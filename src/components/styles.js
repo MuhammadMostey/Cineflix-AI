@@ -1,8 +1,4 @@
-import { makeStyles, useTheme } from "@mui/material/styles";
-import { display, height } from "@mui/system";
-
-export const customStyles = () => {
-  const theme = useTheme();
+export const customStyles = (theme) => {
   return {
     root: {
       display: "flex",
