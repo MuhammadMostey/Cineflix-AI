@@ -1,17 +1,11 @@
 // React
 import React from "react";
-import {
-  Routes,
-  Route,
-  createBrowserRouter,
-  RouterProvider,
-  Link,
-  Router,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+
 // Material UI
 import { CssBaseline } from "@mui/material";
 import { Box } from "@mui/material";
-import { ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider, useTheme } from "@mui/material/styles";
 //components
 import {
   Actors,
@@ -20,22 +14,25 @@ import {
   Navbar,
   Profile,
   mainRoutes,
+  RoutesNew,
 } from "./";
 // custom styles
 import { customStyles } from "./styles.js";
 
 const App = () => {
-  const classes = customStyles();
+  const theme = useTheme();
+  const classes = customStyles(theme);
 
   return (
     <Box sx={classes.root}>
       <CssBaseline />
-      <ThemeProvider theme={customStyles}>
+      <Router>
         <Navbar />
-      </ThemeProvider>
-      <Box component="main" sx={classes.content}>
-        <Box sx={classes.toolbar} />
-      </Box>
+        <Box component="main" sx={classes.content}>
+          <Box sx={classes.toolbar} />
+          <RoutesNew />
+        </Box>
+      </Router>
     </Box>
   );
 };
