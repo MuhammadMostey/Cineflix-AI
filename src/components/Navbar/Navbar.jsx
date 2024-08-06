@@ -1,9 +1,6 @@
 //React
 import React from "react";
-import { Link, BrowserRouter, Routes, Route, Router } from "react-router-dom";
-
-// Custom styles
-// import { NavbarStyles } from "./styles";
+import { Link } from "react-router-dom";
 
 // mui Navbar Components
 import {
@@ -19,39 +16,21 @@ import {
 
 // mui Icons
 import { DarkMode, LightMode, Menu, AccountCircle } from "@mui/icons-material";
-import { useTheme, createTheme } from "@mui/material/styles";
 
-// delete
-const theme = useTheme();
-const NavbarStyles = createTheme({
-  toolbar: {
-    height: "80px",
-    display: "flex",
-    justifyContent: "space-between",
-    marginLeft: "240px",
-    [theme.breakpoints.down("sm")]: {
-      marginLeft: "0",
-      flexWrap: "wrap",
-    },
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up("sm")]: {
-      display: "none",
-    },
-  },
-  linkButton: {},
-});
+// mui styling
+import { useTheme } from "@mui/material/styles";
+
+// Custom styles
+import { NavbarStyles } from "./styles";
 
 const Navbar = () => {
-  const classes = NavbarStyles();
   const theme = useTheme();
+  const classes = NavbarStyles(theme);
 
   const isMobile = useMediaQuery("(max-width: 600px)");
-  const isAuthenticated = false;
+  const isAuthenticated = true;
   return (
     <>
-      {console.log(NavbarStyles)}
       <AppBar position="fixed">
         <Toolbar sx={classes.toolbar}>
           {isMobile && (
@@ -76,47 +55,20 @@ const Navbar = () => {
                 Login &nbsp; <AccountCircle />
               </Button>
             ) : (
-              /* <Button component={Link} to="/profile/:id">
-                Go to About Page
-              </Button> */
-              <Button color="inherit" onClick={() => {}}>
-                <Link to="/profile/:id">
-                  <Avatar
-                    style={{ width: 30, height: 30 }}
-                    alt="Profile Page Button"
-                  ></Avatar>
-                </Link>
+              <Button
+                component={Link}
+                to={"/profile/:id"}
+                color="inherit"
+                sx={classes.linkButton}
+                onClick={() => {}}
+              >
+                {!isMobile && <>My Movies &nbsp; </>}
+                <Avatar
+                  style={{ width: 30, height: 30 }}
+                  alt="Profile"
+                  src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
+                />
               </Button>
-
-              /* <BrowserRouter>
-                <Button>go</Button>
-                <Routes>
-                  <Route path="/profile/:id" />
-                </Routes>
-              </BrowserRouter> */
-              /* <Router>
-                <Button component={Link} to="/profile">
-                  {!isMobile && <>My Movies &nbsp;</>}
-                  <Avatar style={{ width: 30, height: 30 }} alt="Profile" />
-                </Button>
-              </Router> */
-
-              /* <BrowserRouter>
-                <Routes>
-                  <Route>
-                    <Button
-                      color="inherit"
-                      component={Link}
-                      to="/profile/:id"
-                      onClick={() => {}}
-                      sx={classes.linkButton}
-                    >
-                      {!isMobile && <>My Movies &nbsp;</>}
-                      <Avatar style={{ width: 30, height: 30 }} alt="Profile" />
-                    </Button>
-                  </Route>
-                </Routes>
-              </BrowserRouter> */
             )}
           </Box>
           {isMobile && "Search ..."}
